@@ -1,0 +1,15 @@
+C:\Development\RocketLanding\RocketLanding\bin\Debug\net8.0\RocketLanding.exe
+C:\Development\RocketLanding\RocketLanding\bin\Debug\net8.0\RocketLanding.deps.json
+C:\Development\RocketLanding\RocketLanding\bin\Debug\net8.0\RocketLanding.runtimeconfig.json
+C:\Development\RocketLanding\RocketLanding\bin\Debug\net8.0\RocketLanding.dll
+C:\Development\RocketLanding\RocketLanding\bin\Debug\net8.0\RocketLanding.pdb
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.csproj.AssemblyReference.cache
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.GeneratedMSBuildEditorConfig.editorconfig
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.AssemblyInfoInputs.cache
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.AssemblyInfo.cs
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.csproj.CoreCompileInputs.cache
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.dll
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\refint\RocketLanding.dll
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.pdb
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\RocketLanding.genruntimeconfig.cache
+C:\Development\RocketLanding\RocketLanding\obj\Debug\net8.0\ref\RocketLanding.dll
