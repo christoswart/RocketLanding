@@ -12,6 +12,11 @@
         rocketDisplay = "\r\n" + rocketDisplay;
     }
 
+    public void UpdateLift()
+    {
+        rocketDisplay = rocketDisplay.Substring(3);
+    }
+
     public void Display()
     {
         Console.WriteLine(rocketDisplay);
@@ -51,6 +56,24 @@ public class CountdownTimer
 
         Console.WriteLine("The Rocket has Landed!");
     }
+
+    public void LiftOff()
+    {
+        _counter = 0;
+        while (_counter < 8)
+        {
+            Console.Clear();
+            Console.WriteLine("The Rocket has Launched!");
+            _rocket.Display();
+            _rocket.UpdateLift();
+
+            int sleepTime = 1100 - (_counter * 100);
+            Thread.Sleep(sleepTime);
+
+            _counter++;
+            Console.WriteLine($"Flying for {_counter} seconds");
+        }
+    }
 }
 
 public class Program
@@ -65,6 +88,10 @@ public class Program
 
         // Start the countdown
         timer.Start();
+
+        Thread.Sleep(1000);
+
+        timer.LiftOff();
 
         // Wait for user input to close
         Console.ReadKey();

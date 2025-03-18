@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RocketLanding")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4d8dc389c696dc07fa4b04c2639dd2b13180912")]
 [assembly: System.Reflection.AssemblyProductAttribute("RocketLanding")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RocketLanding")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

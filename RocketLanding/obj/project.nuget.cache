@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2bzMNs2De4s=",
+  "dgSpecHash": "JFObXLCQQkU=",
   "success": true,
-  "projectFilePath": "C:\\Development\\RocketLanding\\RocketLanding\\RocketLanding.csproj",
+  "projectFilePath": "C:\\Users\\Christo\\Source\\Repos\\RocketLanding\\RocketLanding\\RocketLanding.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Christo\\.nuget\\packages\\microsoft.netcore.app\\2.2.8\\microsoft.netcore.app.2.2.8.nupkg.sha512",
     "C:\\Users\\Christo\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.2.8\\microsoft.netcore.dotnetapphost.2.2.8.nupkg.sha512",
