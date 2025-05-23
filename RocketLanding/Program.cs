@@ -1,6 +1,25 @@
-﻿public class Rocket
+﻿using System;
+using System.Threading.Tasks;
+
+public interface IRocketDisplay
+{
+    void Clear();
+    void ShowMessage(string message);
+    void ShowRocket(Rocket rocket);
+}
+
+public class ConsoleRocketDisplay : IRocketDisplay
+{
+    public void Clear() => Console.Clear();
+    public void ShowMessage(string message) => Console.WriteLine(message);
+    public void ShowRocket(Rocket rocket) => Console.WriteLine(rocket.ToString());
+}
+
+public class Rocket
 {
     private string rocketDisplay;
+    public const string DefaultRocketArt =
+        "     |\r\n     |\r\n    / \\\r\n   / _ \\\r\n  |.o '.|\r\n  |'._.'|\r\n  |     |\r\n ,'|  | |`.\r\n/  |  | |  \\\r\n|,-'--|--'-.|";
 
     public Rocket(string initialDisplay)
     {
@@ -14,12 +33,14 @@
 
     public void UpdateLift()
     {
-        rocketDisplay = rocketDisplay.Substring(3);
-    }
-
-    public void Display()
-    {
-        Console.WriteLine(rocketDisplay);
+        if (rocketDisplay.Length >= 3)
+        {
+            rocketDisplay = rocketDisplay.Substring(3);
+        }
+        else
+        {
+            rocketDisplay = string.Empty;
+        }
     }
 
     public override string ToString()
@@ -32,68 +53,70 @@ public class CountdownTimer
 {
     private int _counter;
     private readonly Rocket _rocket;
+    private readonly IRocketDisplay _display;
+    private readonly int _startCounter;
+    private const int MaxLiftOffSeconds = 8;
+    private const int BaseSleepTimeMs = 1100;
+    private const int SleepDecrementMs = 100;
+    private const string LandingMessage = "The Rocket has Landed!";
+    private const string LaunchMessage = "The Rocket has Launched!";
+    private const string FlyingMessage = "Flying for {0} seconds";
+    private const string LandingCountdownMessage = "Landing in {0}";
 
-    public CountdownTimer(int startCounter, Rocket rocket)
+    public CountdownTimer(int startCounter, Rocket rocket, IRocketDisplay display)
     {
         _counter = startCounter;
+        _startCounter = startCounter;
         _rocket = rocket;
+        _display = display;
     }
 
-    public void Start()
+    public async Task StartAsync()
     {
         while (_counter >= 0)
         {
-            Console.Clear();
-            Console.WriteLine($"Landing in {_counter}");
-            _rocket.Display();
+            _display.Clear();
+            _display.ShowMessage(string.Format(LandingCountdownMessage, _counter));
+            _display.ShowRocket(_rocket);
             _rocket.UpdateDisplay();
 
-            int sleepTime = 1100 - (_counter * 100);
-            Thread.Sleep(sleepTime);
+            int sleepTime = Math.Max(100, BaseSleepTimeMs - (_counter * SleepDecrementMs));
+            await Task.Delay(sleepTime);
 
             _counter--;
         }
-
-        Console.WriteLine("The Rocket has Landed!");
+        _display.ShowMessage(LandingMessage);
     }
 
-    public void LiftOff()
+    public async Task LiftOffAsync()
     {
         _counter = 0;
-        while (_counter < 8)
+        while (_counter < MaxLiftOffSeconds)
         {
-            Console.Clear();
-            Console.WriteLine("The Rocket has Launched!");
-            _rocket.Display();
+            _display.Clear();
+            _display.ShowMessage(LaunchMessage);
+            _display.ShowRocket(_rocket);
             _rocket.UpdateLift();
 
-            int sleepTime = 1100 - (_counter * 100);
-            Thread.Sleep(sleepTime);
+            int sleepTime = Math.Max(100, BaseSleepTimeMs - (_counter * SleepDecrementMs));
+            await Task.Delay(sleepTime);
 
             _counter++;
-            Console.WriteLine($"Flying for {_counter} seconds");
+            _display.ShowMessage(string.Format(FlyingMessage, _counter));
         }
     }
 }
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        // Initialize Rocket object
-        Rocket rocket = new Rocket("     |\r\n     |\r\n    / \\\r\n   / _ \\\r\n  |.o '.|\r\n  |'._.'|\r\n  |     |\r\n ,'|  | |`.\r\n/  |  | |  \\\r\n|,-'--|--'-.|");
-
-        // Initialize CountdownTimer with starting counter value and rocket object
-        CountdownTimer timer = new CountdownTimer(10, rocket);
-
-        // Start the countdown
-        timer.Start();
-
-        Thread.Sleep(1000);
-
-        timer.LiftOff();
-
-        // Wait for user input to close
+        Rocket rocket = new Rocket(Rocket.DefaultRocketArt);
+        IRocketDisplay display = new ConsoleRocketDisplay();
+        CountdownTimer timer = new CountdownTimer(10, rocket, display);
+        await timer.StartAsync();
+        await Task.Delay(1000);
+        await timer.LiftOffAsync();
         Console.ReadKey();
     }
 }
